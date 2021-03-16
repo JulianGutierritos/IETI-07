@@ -1,0 +1,29 @@
+service: service-task
+frameworkVersion: '2'
+
+provider:
+  name: aws
+  runtime: nodejs12.x
+  lambdaHashingVersion: 20201221
+  stage: dev
+  region: us-east-1
+
+
+functions:
+    add-task:
+        handler: add-task/index.add
+        memorySize: 128
+        description: Create a new task.
+        events:
+          - http: 
+              path: task
+              method: post
+          
+    listTasks:
+        handler: list-tasks/index.list
+        memorySize: 128
+        description: List all tasks
+        events:
+          - http: 
+              path: tasks
+              method: get 
